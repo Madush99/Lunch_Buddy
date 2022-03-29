@@ -26,13 +26,16 @@ class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(56, 75, 49, 1.0),
+      backgroundColor: Color.fromRGBO(177, 219, 238, 1),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(56, 75, 49, 1.0),
-        title: Text("Country View"),
+
+        title: Text("Location View"),
         actions: [
           IconButton(
-              icon: Icon(Icons.delete),
+              icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+              ),
               onPressed: () {
                 widget.db.delete(widget.locations["id"]);
                 Navigator.pop(context, true);
@@ -85,12 +88,15 @@ class _ViewState extends State<View> {
   InputDecoration inputDecoration(String labelText) {
     return InputDecoration(
       focusColor: Colors.white,
-      labelStyle: TextStyle(color: Colors.white),
+      labelStyle: TextStyle(color: Colors.black),
       labelText: labelText,
       fillColor: Colors.white,
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25.0),
-        borderSide: BorderSide(color: Colors.white),
+        borderSide: BorderSide(
+            color: Colors.black,
+            width: 2.0,
+        ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25.0),
