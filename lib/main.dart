@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lunch/database.dart';
+import 'package:lunch/view.dart';
+
+import 'add.dart';
 
 Future<void> main() async {
 
@@ -79,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Color.fromRGBO(177, 219, 238, 1),
       appBar: AppBar(
 
-        title: Text(widget.title),
+        title: Text("Lunch Buddy Locations"),
       ),
       body:ListView.builder(
           itemCount: docs.length,
@@ -87,14 +90,33 @@ class _MyHomePageState extends State<MyHomePage> {
             return Card(
               margin: EdgeInsets.all(10),
               child: ListTile(
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => 
+                              View(locations: docs[index],db: db)))
+                      .then((value) => {
+                        if(value != null) {initialise()}
+                  });
+                },
                 contentPadding: EdgeInsets.only(right: 30,left: 36),
                 title: Text(docs[index]['name']),
-                trailing: Text(docs[index]['location']),
+                trailing: Text(docs[index]['city']),
               ),
             );
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    Add(db: db)))
+            .then((value) => {
+          if(value != null) {
+            initialise()
+          }
+        });},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
